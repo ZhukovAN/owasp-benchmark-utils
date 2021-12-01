@@ -870,6 +870,11 @@ public class BenchmarkScore extends AbstractMojo {
                 tr = new SeekerReader().parse(fileToParse);
             } else if (line1.contains("CWE") && line1.contains("URL")) {
                 tr = new CheckmarxIASTReader().parse(fileToParse);
+            } else if (line1.contains("QueryPath")
+                    && line1.contains("Query")
+                    && line1.contains("NodeId")
+                    && line1.contains("DestNodeId")) {
+                tr = new CheckmarxSASTReader().parse(fileToParse);
             } else System.out.println("Error: No matching parser found for CSV file: " + filename);
         } else if (filename.endsWith(".ozasmt")) {
             tr = new AppScanSourceReader().parse(fileToParse);
